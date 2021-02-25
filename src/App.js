@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Button, Grid, TextField, makeStyles } from '@material-ui/core';
+import { Formik, Form } from 'formik';
+
+import MyForm from './form.js';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    height: '100vh',
+    width: '100vw',
+  },
+}));
 
 function App() {
+  const classes = useStyles();
+
+  function handleSubmit(values) {
+    debugger;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Formik
+          initialValues={{
+            firstName: '',
+            lastName: '',
+            email: '',
+            date: new Date(),
+            address: '',
+            city: '',
+            state: '',
+            postalCode: '',
+          }}
+          onSubmit={handleSubmit}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {(props) => {
+            return (
+              <Box className={classes.root} display='flex' alignItems='center' justifyContent='center'>
+                <Grid container spacing={3}>
+                  <MyForm />
+                </Grid>
+              </Box>
+            )
+          }}
+        </Formik>
   );
 }
 
